@@ -1,4 +1,4 @@
-console.log("Первый цикл");
+/*console.log("Первый цикл");
 for(let i = 1; i <= 50; i++){
     console.log(i);
 }
@@ -12,4 +12,11 @@ for (let b = 2500; b <= 3000; b++){
     continue
 }
 console.log(b);
-} 
+} */
+
+let num = +prompt();
+let i = 1;
+while(i < 10){
+    let a = num * i;
+    console.log(a);
+}

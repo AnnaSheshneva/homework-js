@@ -7,7 +7,7 @@ btn.onclick = function(){
         div.innerHTML += `${e} `
         inp.value = '';
         alert(e)
-    }else(e > 100);{
+    }else{
         console.log(e)
        }
    
@@ -17,8 +17,8 @@ btn.onclick = function(){
 
     let a = +prompt();
 if(a < 100){
-   alert(a)
-}else(a > 100); {
+   alert(a);
+}else {
    console.log(a);
 }*/
 
