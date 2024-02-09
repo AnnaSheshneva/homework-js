@@ -14,7 +14,7 @@ function num(){
         let b = array_num[i];
         if (b % 2 == 0){
             console.log(b);
-            document.querySelector('.nums').innerHTML = b;
+            document.querySelector('.nums').innerHTML += b;
         }
        
     }
@@ -27,7 +27,7 @@ function num(){
             let b = array_num_2[i];
             if (b % 2 == 1){
                 console.log(b);
-                document.querySelector('.nums_2').innerHTML = b;
+                document.querySelector('.nums_2').innerHTML += b;
             }
         }
         }
