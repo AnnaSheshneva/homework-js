@@ -14,7 +14,7 @@ let tasks_content = document.querySelector('.tasks-content')
 let arr = [];
 let tasks= 0;
  function todo(){
-     
+      todoAdd ();
       let text_mes = text.value.trim();
       if (text_mes == ""){
             alert("Поле пустое, введите текст");
@@ -25,11 +25,11 @@ let tasks= 0;
       let b = 'Ваши задачи:';
       document.querySelector('.no-tasks-message').innerHTML = b;
       document.querySelector('.tasks-count_1').innerHTML = arr.length;
-      todoAdd (text);
+      
      
 }
 document.querySelector('.plus').onclick = todo;
-function todoAdd (text){
+function todoAdd (){
       let  listItem = document.createElement('span');
       listItem.style.color = 'black';
       listItem.textContent = text.value;
@@ -37,13 +37,31 @@ function todoAdd (text){
 
       let  listItem_button = document.createElement('button');
       listItem_button.classList.add('tasks_button');
-      listItem.appendChild(listItem_button);  
       
+      let del = 'удалить';
+      listItem_button.innerHTML = del
+      listItem_button.style.color= 'white';
+
+     
       listItem.onclick = function() {
-            listItem.classList.toggle('list');
+            let lastClick = listItem.classList.toggle('list');
+            if (lastClick){
             tasks++;
-            tasks_completed_2.innerHTML = tasks;
-          }
-         
+      }     else {
+            tasks--;
+      }
+      tasks_completed_2.innerHTML = tasks;
+      
+      
+          listItem_button.onclick = function(){
+            let index = this.getAttribute('data-index');
+            tasks_content.removeChild(listItem);
+    arr.splice(index, 1);
+    tasks_count.innerHTML = arr.length;
+   
+      }
 }
+      listItem.appendChild(listItem_button); 
+      
+} 
 
