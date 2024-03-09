@@ -14,7 +14,7 @@ let tasks_content = document.querySelector('.tasks-content')
 let arr = [];
 let tasks= 0;
  function todo(){
-      todoAdd ();
+     
       let text_mes = text.value.trim();
       if (text_mes == ""){
             alert("Поле пустое, введите текст");
@@ -25,24 +25,39 @@ let tasks= 0;
       let b = 'Ваши задачи:';
       document.querySelector('.no-tasks-message').innerHTML = b;
       document.querySelector('.tasks-count_1').innerHTML = arr.length;
-      
+      todoAdd ();
      
 }
 document.querySelector('.plus').onclick = todo;
+
 function todoAdd (){
       let  listItem = document.createElement('span');
       listItem.style.color = 'black';
       listItem.textContent = text.value;
-      tasks_content.appendChild(listItem);  
+      tasks_content.appendChild(listItem); 
+
+      localStorage.setItem('case', JSON.stringify(arr));
+      users = JSON.parse(localStorage.getItem('case'));
+      
 
       let  listItem_button = document.createElement('button');
       listItem_button.classList.add('tasks_button');
-      
-      let del = 'удалить';
+            let del = 'удалить';
       listItem_button.innerHTML = del
       listItem_button.style.color= 'white';
+      listItem_button.setAttribute('data-index', arr.length - 1);
+      
+      listItem_button.onclick = function(){
+            let index = parseInt(this.getAttribute('data-index'));
+            tasks_content.removeChild(listItem);
+            arr.splice(index, 1);
+            tasks_count.innerHTML = arr.length;
+            buttIndex ();
+            localStorage.setItem('case', JSON.stringify(arr));
+        };
+         listItem.appendChild(listItem_button); 
 
-     
+         
       listItem.onclick = function() {
             let lastClick = listItem.classList.toggle('list');
             if (lastClick){
@@ -50,18 +65,15 @@ function todoAdd (){
       }     else {
             tasks--;
       }
-      tasks_completed_2.innerHTML = tasks;
+         tasks_completed_2.innerHTML = tasks;
       
-      
-          listItem_button.onclick = function(){
-            let index = this.getAttribute('data-index');
-            tasks_content.removeChild(listItem);
-    arr.splice(index, 1);
-    tasks_count.innerHTML = arr.length;
-   
       }
-}
-      listItem.appendChild(listItem_button); 
-      
 } 
 
+function buttIndex (){
+      let buttons = document.querySelectorAll('.tasks_button');
+      buttons.forEach((button, index) => {
+            button.setAttribute('data-index', index) ;
+           
+      });
+}
